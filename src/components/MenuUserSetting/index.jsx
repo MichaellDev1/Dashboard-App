@@ -36,7 +36,7 @@ export default function MenuUserSetting () {
   }, [imageUser])
 
   return (
-    <div className='w-[300px] z-10 h-[400px] bg-slate-100 absolute right-10 top-20 flex rounded-lg flex-col justify-center p-10'>
+    <div className='w-[300px] z-20 h-[400px] bg-slate-100 absolute right-0 left-0 m-auto top-20 flex rounded-lg flex-col justify-center p-10'>
       <div>
         <div className='relative flex mb-5 justify-center items-center'>
           <div className='w-28 rounded-full overflow-hidden h-28'>

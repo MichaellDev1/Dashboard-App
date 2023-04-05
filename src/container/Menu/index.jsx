@@ -4,7 +4,7 @@ import { HiOutlineLogin } from 'react-icons/hi'
 export default function Menu ({ menuHidden }) {
   const url = location.pathname
   return (
-    <div className={`w-64 h-full fixed left-0 rounded-xl top-0 bg-white z-10 p-10 lg:left-0 ${menuHidden ? 'left-0' : 'left-full'}`}>
+    <div className={`w-64 h-full fixed left-0 rounded-xl top-0 bg-white z-20 p-10 lg:left-0 ${menuHidden ? 'left-0' : 'left-full'}`}>
       <div className='flex flex-col justify-between h-full w-full'>
         <div>
           <div className='mb-16'>
@@ -19,8 +19,8 @@ export default function Menu ({ menuHidden }) {
                 </h3>
                 {itemList.subTitles.map(childrenTitle =>
                   (<li key={childrenTitle.name}>
-                    <a className={`px-3 py-[5px] rounded-lg transition-[background-color] text-[17px] font-semibold flex items-center  gap-2 hover:text-white hover:bg-[#4360ef] ${url === childrenTitle.href ? 'bg-[#4360ef] text-[#fff]' : 'text-slate-950'}`} href={childrenTitle.href}>
-                      <span>{childrenTitle.icon}</span><span>{childrenTitle.name}</span>
+                    <a className={`px-3 py-[5px] rounded-lg transition-[background-color] sm:text-[17px] text-[15px] font-semibold flex items-center hover:text-white hover:bg-[#4360ef] ${url === childrenTitle.href ? 'bg-[#4360ef] text-[#fff]' : 'text-slate-950'}`} href={childrenTitle.href}>
+                      <span className='mr-3'>{childrenTitle.icon}</span><span>{childrenTitle.name}</span>
                     </a>
                   </li>))}
               </div>

@@ -76,7 +76,7 @@ export default function Chat () {
     refContentChat.current.scrollTop = refContentChat.current.scrollHeight
   }
   return (
-    <div className='fixed z-30 p-5 rounded-lg w-[320px] h-[500px] bg-[#f9f9f9] right-16 top-20' style={{ boxShadow: '0px 2px 20px rgba(0 0 0 / 7%)' }}>
+    <div className='fixed z-10 p-5 rounded-lg w-[320px] h-[500px] bg-[#f9f9f9] top-20 left-0 right-0 m-auto' style={{ boxShadow: '0px 2px 20px rgba(0 0 0 / 7%)' }}>
       <div className='h-[40px] flex gap-3 items-center'>
         {selected !== null ? <button onClick={() => handleAtras()}>Atras</button> : null}
         <h4>Chat</h4>
