@@ -1,6 +1,5 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { AiOutlineRise } from 'react-icons/ai'
-import { userConfig } from '../../Db/user'
 import './index.css'
 import {
   Chart as ChartJS,
@@ -14,7 +13,9 @@ import {
   Legend
 } from 'chart.js'
 import { Line } from 'react-chartjs-2'
-import { data, options } from '../../Db/GraficaHome/index'
+import { data, options } from '../../Db/GraficaHome'
+
+import Context from '../../context/userContext'
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -26,6 +27,7 @@ ChartJS.register(
   Legend
 )
 export default function Dashboard () {
+  const { user } = useContext(Context)
   return (
     <div className='px-6 w-full h-min-[400px] relative'>
       <div className='grid md:grid-cols-3 grid-cols-1 gap-5 w-full place-content-centeh-full'>
@@ -90,7 +92,7 @@ export default function Dashboard () {
           >
             <div className='w-28 h-28 relative  rounded-full  overflow-hidden'>
               <img
-                src={userConfig.image}
+                src={user.image}
                 className='w-full h-full object-cover'
                 alt=''
               />

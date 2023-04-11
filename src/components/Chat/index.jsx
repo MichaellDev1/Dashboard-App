@@ -83,20 +83,20 @@ export default function Chat () {
       </div>
       {
         selected === null
-          ? <ul className='flex flex-col gap-5'>
+          ? <ul className='flex flex-col'>
             {chatUsers.map(res => (
-              <li key={res.id} className='cursor-pointer'>
+              <li key={res.id} className='my-2 cursor-pointer'>
                 <div
                   className='bg-[#e4e3e3] w-full py-3
-            px-2 flex items-center gap-2'
+            px-2 flex items-center'
                   onClick={() => handleEnterChat(res.id)}
                 >
                   <div className='w-10 h-10 bg-black rounded-full ' />
-                  <h4>{res.name}</h4>
+                  <h4 className='ml-3'>{res.name}</h4>
                 </div>
               </li>
             ))}
-            </ul>
+          </ul>
           : <div className='h-full relative'>
             <h3>{selected.name}</h3>
             <ul className='flex flex-col gap-3 overflow-y-scroll h-[365px]' ref={refContentChat}>
@@ -109,7 +109,7 @@ export default function Chat () {
             <form action='' onSubmit={handleSubmit} className='absolute bottom-7 w-full'>
               <input type='text' ref={refInput} name='chat' onChange={handleChange} className='py-2 w-[100%] bg-slate-300 rounded-3xl outline-none px-5' id='chat' />
             </form>
-            </div>
+          </div>
       }
     </div>
   )

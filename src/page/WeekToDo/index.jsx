@@ -5,7 +5,6 @@ import useTask from '../../hooks/useTask'
 export default function WeekToDo () {
   const { week } = useParams()
   const { deleteTask, handleChange, handleSubmit, saveTask, setTasksList, taskList } = useTask()
-
   return (
     <div className='px-6 w-full h-min-[400px] relative'>
       <h1 className='font-bold text-2xl '>{week}</h1>

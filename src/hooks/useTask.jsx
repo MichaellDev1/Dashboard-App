@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react'
-import { tasks } from '../Db/task'
 import { useParams } from 'react-router-dom'
 
 export default function useTask () {
   const { week } = useParams()
-  const [taskList, setTasksList] = useState([])
   const [newTask, setNewTask] = useState('')
+  const tasks = JSON.parse(localStorage.getItem('task'))
+  const inxWeek = tasks.findIndex(task => task.week === week)
+  const taskList = tasks[inxWeek].task
 
   const handleChange = (e) => {
     setNewTask(e.target.value)
@@ -14,14 +15,16 @@ export default function useTask () {
   const handleSubmit = (e) => {
     e.preventDefault()
     const newTaskCreate = [
-      ...taskList,
+      ...tasks[inxWeek].task,
       {
-        id: taskList.length,
+        id: tasks[inxWeek].length,
         nameTask: newTask,
         important: false
       }
     ]
     setTasksList(newTaskCreate)
+    tasks[inxWeek].task.push(newTaskCreate)
+    localStorage.setItem('task', JSON.stringify(tasks))
   }
 
   useEffect(() => {
@@ -30,19 +33,21 @@ export default function useTask () {
   }, [])
 
   const deleteTask = (id) => {
-    const filterTask = taskList.filter(res => res.id !== id)
+    const filterTask = tasks[inxWeek].filter(res => res.id !== id)
     setTasksList(filterTask)
+    localStorage.setItem('task', JSON.stringify())
   }
 
   const saveTask = ({ id, refTask, refCheckBox, setEditable }) => {
-    const task = taskList.findIndex(tas => tas.id === id)
-    taskList[task] = {
+    const task = tasks[inxWeek].findIndex(tas => tas.id === id)
+    tasks[inxWeek][task] = {
       id,
       nameTask: refTask.current.textContent,
       important: refCheckBox.current.checked
     }
     setEditable(false)
-    setTasksList([...taskList])
+    setTasksList([...tasks[inxWeek]])
+    localStorage.setItem('task', JSON.stringify(tasks))
   }
 
   return { deleteTask, saveTask, handleChange, handleSubmit, taskList, setTasksList }

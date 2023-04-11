@@ -1,3 +1,4 @@
+
 export const options = {
   responsive: true,
   plugins: {
@@ -6,22 +7,21 @@ export const options = {
     },
     title: {
       display: true,
-      text: 'Weekly balance'
+      text: 'Chart.js Line Chart'
     }
   }
 }
 
-const labels = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July']
 
 export const data = {
   labels,
   datasets: [
     {
-      label: 'Balance',
-      fill: true,
+      label: 'Weeks',
       data: labels.map(() => Math.round(Math.random() * 1000)),
-      borderColor: '#4de2ce',
-      backgroundColor: '#4becd767'
+      borderColor: 'rgb(53, 162, 235)',
+      backgroundColor: 'rgba(53, 162, 235, 0.5)'
     }
   ]
 }

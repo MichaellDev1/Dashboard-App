@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import Context from '../../context/userContext'
 import { BiPencil } from 'react-icons/bi'
-import { userConfig } from '../../Db/user'
 
 const linkMenuUser = [
   {
@@ -18,6 +18,8 @@ const linkMenuUser = [
 
 export default function MenuUserSetting () {
   const [imageUser, setImageUser] = useState()
+  const { user, setUser } = useContext(Context)
+
   const imageShow = (e) => {
     setImageUser(e.target.result)
   }
@@ -31,25 +33,28 @@ export default function MenuUserSetting () {
 
   useEffect(() => {
     if (imageUser) {
-      userConfig.image = imageUser
+      setUser({
+        ...user,
+        image: imageUser
+      })
     }
   }, [imageUser])
 
   return (
-    <div className='w-[300px] z-20 h-[400px] bg-slate-100 absolute right-0 left-0 m-auto top-20 flex rounded-lg flex-col justify-center p-10'>
+    <div className='w-[300px] z-20 h-[400px] bg-slate-100 absolute right-1 top-20 flex rounded-lg flex-col justify-center p-10'>
       <div>
         <div className='relative flex mb-5 justify-center items-center'>
           <div className='w-28 rounded-full overflow-hidden h-28'>
-            <img src={userConfig.image} alt='' className='object-cover w-full h-full' />
+            <img src={user.image} alt='' className='object-cover w-full h-full' />
           </div>
           <div className='bottom-[0px] bg-orange-400 text-white text-lg p-1 absolute right-[60px] rounded-full'>
             <BiPencil />
             <input type='file' className='absolute top-0 left-0 right-0 bottom-0 w-full h-full opacity-0' onChange={handlePerfilUser} />
           </div>
         </div>
-        <ul className='flex flex-col gap-2'>
+        <ul className='flex flex-col'>
           {linkMenuUser.map((res, inx) => (
-            <li key={inx}>
+            <li key={inx} className='my-[5px]'>
               <a href='#'>{res.name}</a>
             </li>
           ))}
