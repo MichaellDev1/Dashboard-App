@@ -1,9 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import getPriceCoin from '../../services/getPriceCoin'
+import Context from '../../context/userContext'
 
 export default function Market () {
   const [coins, setCoins] = useState([])
+  const { user, setUser } = useContext(Context)
   useEffect(() => {
+
+    if (localStorage.getItem('user')) {
+      setUser(JSON.parse(localStorage.getItem('user')))
+    }
+
     getPriceCoin({ limit: 40, page: 1 }).then(res => {
       console.log(res)
       setCoins(res)

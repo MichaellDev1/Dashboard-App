@@ -1,10 +1,18 @@
 import { useParams } from 'react-router-dom'
 import CardTask from '../../components/CardTask/CardTask'
 import useTask from '../../hooks/useTask'
+import { useContext, useEffect } from 'react'
+import Context from '../../context/userContext'
 
 export default function WeekToDo () {
   const { week } = useParams()
   const { deleteTask, handleChange, handleSubmit, saveTask, setTasksList, taskList } = useTask()
+  const { setUser } = useContext(Context)
+
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem('user')))
+  }, [])
+
   return (
     <div className='px-6 w-full h-min-[400px] relative'>
       <h1 className='font-bold text-2xl '>{week}</h1>

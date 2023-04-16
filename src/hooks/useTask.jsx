@@ -6,6 +6,7 @@ export default function useTask () {
   const [newTask, setNewTask] = useState('')
   const tasks = JSON.parse(localStorage.getItem('task'))
   const inxWeek = tasks.findIndex(task => task.week === week)
+  const [task, setTasksList] = useState()
   const taskList = tasks[inxWeek].task
 
   const handleChange = (e) => {
@@ -14,6 +15,7 @@ export default function useTask () {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    console.log(newTask)
     const newTaskCreate = [
       ...tasks[inxWeek].task,
       {
@@ -45,6 +47,7 @@ export default function useTask () {
       nameTask: refTask.current.textContent,
       important: refCheckBox.current.checked
     }
+
     setEditable(false)
     setTasksList([...tasks[inxWeek]])
     localStorage.setItem('task', JSON.stringify(tasks))

@@ -37,6 +37,7 @@ export default function MenuUserSetting () {
         ...user,
         image: imageUser
       })
+      localStorage.setItem('user', JSON.stringify({ ...user, image: imageUser }))
     }
   }, [imageUser])
 

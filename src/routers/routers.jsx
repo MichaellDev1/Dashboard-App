@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Header from '../container/Header/index'
 import Menu from '../container/Menu/index'
@@ -12,11 +12,13 @@ import MenuUserSetting from '../components/MenuUserSetting'
 import PrivateRouter from '../components/PrivateRouter'
 import Login from '../page/Login'
 import Context from '../context/userContext'
+import Detail from '../page/Detail'
 
 export default function Routers () {
-  const [menuHidden, setMenuHidden] = useState(false)
   const { user } = useContext(Context)
+  const [menuHidden, setMenuHidden] = useState(false)
   const [menuUserHidden, setMenuUserHidden] = useState(false)
+
   const handleOpenMenuUser = () => {
     setMenuUserHidden(!menuUserHidden)
   }
@@ -31,7 +33,9 @@ export default function Routers () {
               className='p-3 bg-[#4360EF] text-[#fff] rounded-full fixed bottom-10 text-2xl z-20 right-10 lg:hidden block'
               onClick={() => setMenuHidden(!menuHidden)}
             >
-              {menuHidden ? <IoMdClose /> : <HiMenuAlt1 />}
+              {menuHidden
+                ? <IoMdClose />
+                : <HiMenuAlt1 />}
             </button>
             <Menu menuHidden={menuHidden} />
             <Header handleOpenMenuUser={handleOpenMenuUser} />
@@ -40,6 +44,7 @@ export default function Routers () {
         <Routes>
           <Route element={<PrivateRouter />}>
             <Route path='/dashboard' element={<Dashboard />} />
+            <Route path='/detail/:keyword' element={<Detail />} />
             <Route path='/market' element={<Market />} />
             <Route path='/todolist' element={<ToDoApp />} />
             <Route path='/todolist/:week' element={<WeekToDo />} />
@@ -50,5 +55,3 @@ export default function Routers () {
     </div>
   )
 }
-
-

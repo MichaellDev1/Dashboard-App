@@ -1,8 +1,6 @@
 import React, { createContext, useState } from 'react'
 
-const Context = createContext({
-
-})
+const Context = createContext({})
 
 export function UserContext ({ children }) {
   const [user, setUser] = useState(null)

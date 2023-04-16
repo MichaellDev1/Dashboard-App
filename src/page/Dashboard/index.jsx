@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { AiOutlineRise } from 'react-icons/ai'
 import './index.css'
 import {
@@ -27,9 +27,14 @@ ChartJS.register(
   Legend
 )
 export default function Dashboard () {
-  const { user } = useContext(Context)
-  return (
-    <div className='px-6 w-full h-min-[400px] relative'>
+  const { user, setUser } = useContext(Context)
+
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem('user')))
+  }, [])
+
+  return user
+    ? <div className='px-6 w-full h-min-[400px] relative'>
       <div className='grid md:grid-cols-3 grid-cols-1 gap-5 w-full place-content-centeh-full'>
         <div className='min-h-[520px] col-span-2 flex flex-col gap-5'>
           <div
@@ -59,7 +64,7 @@ export default function Dashboard () {
                       className='font-semibold text-base'
                       style={{ lineHeight: '2px' }}
                     >
-                      Michael Santucho
+                      {user.name}
                     </span>
                   </div>
                   <div className='flex flex-col gap-[15px]'>
@@ -165,5 +170,5 @@ export default function Dashboard () {
         </div>
       </div>
     </div>
-  )
+    : null
 }
