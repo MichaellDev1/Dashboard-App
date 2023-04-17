@@ -1,35 +1,33 @@
-import { MARKET_URL, SINGLE_COIN, URL_API } from "./config";
+import { MARKET_URL, SINGLE_COIN, URL_API } from './config'
 
-function dataMarket(data) {
+function dataMarket (data) {
+  const { id, name, image, market_data, description, total_volume } = data
+
+  const { thumb, large } = image
   const {
-    id,
-    name,
     current_price,
-    image,
-    total_volume,
-    total_supply,
-    sparkline_in_7d,
+    low_24h,
+    high_24h,
     circulating_supply,
-    hight_24h,
-    market_cap,
-    description,
-  } = data;
-
-  const { thumb } = image;
+    sparkline_7d,
+    symbol
+  } = market_data
 
   return {
     id,
     name,
+    thumb,
+    market_data,
+    symbol,
+    description,
     current_price,
     total_volume,
-    total_supply,
-    sparkline_in_7d,
+    low_24h,
     circulating_supply,
-    hight_24h,
-    market_cap,
-    thumb,
-    description
-  };
+    high_24h,
+    large,
+    sparkline_7d
+  }
 }
 
 const getSingleCoin = ({ id }) => {
@@ -37,7 +35,7 @@ const getSingleCoin = ({ id }) => {
 
   `)
     .then((res) => res.json())
-    .then(dataMarket);
-};
+    .then(dataMarket)
+}
 
-export default getSingleCoin;
+export default getSingleCoin

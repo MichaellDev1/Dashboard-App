@@ -11,6 +11,7 @@ export default function Menu ({ menuHidden }) {
 
   const handleLogOut = () => {
     localStorage.removeItem('user')
+    localStorage.removeItem('lastCoin')
     setUser(null)
     navigate('/login')
   }

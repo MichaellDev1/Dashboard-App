@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Header from '../container/Header/index'
-import Menu from '../container/Menu/index'
+import Header from '../components/Header/index'
+import Menu from '../components/Menu/index'
 import Dashboard from '../page/Dashboard/index'
 import Market from '../page/Market'
 import { IoMdClose } from 'react-icons/io'
@@ -13,6 +13,9 @@ import PrivateRouter from '../components/PrivateRouter'
 import Login from '../page/Login'
 import Context from '../context/userContext'
 import Detail from '../page/Detail'
+import Favorite from '../page/Favorite'
+import Wallet from '../page/Wallet'
+import Setting from '../page/Setting'
 
 export default function Routers () {
   const { user } = useContext(Context)
@@ -48,6 +51,9 @@ export default function Routers () {
             <Route path='/market' element={<Market />} />
             <Route path='/todolist' element={<ToDoApp />} />
             <Route path='/todolist/:week' element={<WeekToDo />} />
+            <Route path='/favorite' element={<Favorite />} />
+            <Route path='/wallet' element={<Wallet />} />
+            <Route path='/setting' element={<Setting />} />
           </Route>
           <Route path='/login' element={<Login />} />
         </Routes>
