@@ -34,6 +34,7 @@ export default function Detail () {
       setCoin(response)
       setError(false)
       setLoading(false)
+      console.log(response)
       if (localStorageFavorite) {
         const inx = localStorageFavorite.findIndex(({ id }) => id === response.id)
         if (inx === -1) setIsFavorite(false)
@@ -69,7 +70,8 @@ export default function Detail () {
       name: coin.name,
       image: coin.large,
       amount: (amount / coin.current_price.usd),
-      amountUsd: amount
+      amountUsd: amount,
+      symbol: coin.symbol
     }
 
     if (user.balance > amount) {
@@ -97,6 +99,7 @@ export default function Detail () {
       localStorage.setItem('lastCoin', JSON.stringify([newCoin, ...lastCoins]))
     }
   }
+
   const handleAmountCoin = (e) => {
     if (e.target.value < 0) e.target.value = 0
     setAmount(parseInt(e.target.value))
@@ -108,7 +111,8 @@ export default function Detail () {
       name: coin.name,
       image: coin.large,
       amount: (amount / coin.current_price.usd),
-      amountUsd: amount
+      amountUsd: amount,
+      symbol: coin.symbol
     }
 
     if (favorites !== null) {
@@ -180,8 +184,8 @@ export default function Detail () {
                 </div>
                 <button onClick={handleBuyCoin} className='bg-[#4360EF] text-white font-semibold text-base rounded-lg py-1 px-5'>Buy</button>
               </div>
-              </div>
+            </div>
             : null}
-      </div>
+    </div>
     : null
 }

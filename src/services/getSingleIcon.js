@@ -1,7 +1,8 @@
 import { MARKET_URL, SINGLE_COIN, URL_API } from './config'
 
 function dataMarket (data) {
-  const { id, name, image, market_data, description, total_volume } = data
+  console.log(data)
+  const { id, name, image, market_data, description, total_volume, symbol } = data
 
   const { thumb, large } = image
   const {
@@ -9,8 +10,7 @@ function dataMarket (data) {
     low_24h,
     high_24h,
     circulating_supply,
-    sparkline_7d,
-    symbol
+    sparkline_7d
   } = market_data
 
   return {

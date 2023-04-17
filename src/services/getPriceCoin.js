@@ -1,7 +1,7 @@
-import { MARKET_URL, URL_API } from "./config";
+import { MARKET_URL, URL_API } from './config'
 
-function dataMarket(data) {
-  console.log(data);
+function dataMarket (data) {
+  console.log(data)
   const coins = data.map((singleIcon) => {
     const {
       id,
@@ -15,8 +15,8 @@ function dataMarket(data) {
       hight_24h,
       market_cap,
       price_change_24h,
-      symbol,
-    } = singleIcon;
+      symbol
+    } = singleIcon
 
     return {
       id,
@@ -30,11 +30,11 @@ function dataMarket(data) {
       hight_24h,
       market_cap,
       price_change_24h,
-      symbol,
-    };
-  });
+      symbol
+    }
+  })
 
-  return coins;
+  return coins
 }
 
 const getPriceCoin = ({ page = 1, limit = 20 }) => {
@@ -42,7 +42,7 @@ const getPriceCoin = ({ page = 1, limit = 20 }) => {
     `${URL_API}${MARKET_URL}?vs_currency=usd&order=market_cap_desc&per_page=${limit}&page=${page}&sparkline=true&price_change_percentage=price_change_percentage&locale=en`
   )
     .then((res) => res.json())
-    .then(dataMarket);
-};
+    .then(dataMarket)
+}
 
-export default getPriceCoin;
+export default getPriceCoin
