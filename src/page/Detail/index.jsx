@@ -185,8 +185,8 @@ export default function Detail () {
                 </div>
                 <button onClick={handleBuyCoin} className='bg-[#4360EF] text-white font-semibold text-base rounded-lg py-1 px-5'>Buy</button>
               </div>
-            </div>
+              </div>
             : null}
-    </div>
+      </div>
     : null
 }

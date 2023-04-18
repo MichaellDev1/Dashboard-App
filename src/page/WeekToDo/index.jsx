@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom'
 import { useCallback, useContext, useEffect, useState } from 'react'
 import Context from '../../context/userContext'
+import CardTask from '../../components/CardTask/CardTask'
 
 export default function WeekToDo () {
   const { week } = useParams()
@@ -13,7 +14,6 @@ export default function WeekToDo () {
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem('user')))
     setTasks(taskList[inxWeek].task)
-    console.log(taskList[inxWeek])
   }, [])
 
   const hanldeChange = useCallback((e) => {
@@ -22,6 +22,20 @@ export default function WeekToDo () {
 
   const handleAddTask = (e) => {
     e.preventDefault()
+    const createTask = {
+      id: tasks.length,
+      nameTask: newTask,
+      important: false
+    }
+    taskList[inxWeek].task = [createTask, ...tasks]
+    localStorage.setItem('tasks', JSON.stringify(taskList))
+    setTasks([createTask, ...tasks])
+  }
+  const handleDeleteTask = ({ id }) => {
+    const deleteTask = taskList[inxWeek].task.filter(taskk => taskk.id !== id)
+    taskList[inxWeek].task = deleteTask
+    localStorage.setItem('tasks', JSON.stringify(taskList))
+    setTasks(taskList[inxWeek].task)
   }
 
   return user
@@ -38,7 +52,7 @@ export default function WeekToDo () {
             tasks
               ? tasks.map(({ id, important, nameTask }) => (
                 <li key={id}>
-                  <span>{nameTask}</span>
+                  <CardTask data={{ id, important, nameTask }} deleteTask={handleDeleteTask} />
                 </li>
               ))
               : null
