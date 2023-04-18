@@ -37,8 +37,8 @@ export default function Market () {
         </div>
         <ul>
           {coins.map(coin => (
-            <li key={coin.id} className='cursor-pointer  my-2'>
-              <Link to={`/detail/${coin.id}`} className='flex items-center justify-between py-2'>
+            <li key={coin.id} className='cursor-pointer  my-2 bg-white shadow-sm rounded-lg'>
+              <Link to={`/detail/${coin.id}`} className='flex items-center justify-between py-2 px-5'>
                 <div className='flex items-center'>
                   <div className='w-[35px] h-[35px] overflow-hidden mr-3 rounded-full'>
                     <img src={coin.image} alt={coin.name} className='w-full h-full object-cover' />

@@ -104,6 +104,7 @@ export default function Detail () {
     if (e.target.value < 0) e.target.value = 0
     setAmount(parseInt(e.target.value))
   }
+
   const handleAddFavorite = () => {
     const favorites = JSON.parse(localStorage.getItem('favorites'))
     const fav = {

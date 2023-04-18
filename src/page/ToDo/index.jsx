@@ -1,13 +1,48 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import CardWeeks from '../../components/CardWeeks'
 import Context from '../../context/userContext'
 
+const weeks = [{
+  week: 'monday',
+  task: [{
+    id: 0,
+    nameTask: 'Hacerrrrrrrrrrrrr coso',
+    important: false
+  }]
+}, {
+  week: 'tuesday',
+  task: []
+}, {
+  week: 'wednesday',
+  task: []
+}, {
+  week: 'thursday',
+  task: []
+}, {
+  week: 'friday',
+  task: []
+}, {
+  week: 'saturday',
+  task: []
+}, {
+  week: 'sunday',
+  task: []
+}]
+
 export default function ToDoApp () {
-  const tasks = JSON.parse(localStorage.getItem('task'))
+  const [tasks, setTask] = useState()
   const { setUser } = useContext(Context)
 
   useEffect(() => {
+    const verifiWeeksLocalStorage = JSON.parse(localStorage.getItem('tasks'))
     setUser(JSON.parse(localStorage.getItem('user')))
+
+    if (verifiWeeksLocalStorage) {
+      setTask(verifiWeeksLocalStorage)
+    } else {
+      setTask(weeks)
+      localStorage.setItem('tasks', JSON.stringify(weeks))
+    }
   }, [])
 
   return tasks
