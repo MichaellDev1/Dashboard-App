@@ -1,0 +1,64 @@
+.spinner {
+    width: 10px;
+    height: 60px;
+}
+
+.spinner:first-child {
+    height: 20px;
+    animation: spinner1 2s alternate infinite;
+}
+
+.spinner:nth-child(2) {
+    height: 30px;
+    animation: spinner2 2s alternate infinite;
+}
+
+.spinner:nth-child(3) {
+    height: 43px;
+    animation: spinner3 2s alternate infinite;
+
+}
+
+.spinner:last-child {
+    animation: spinner4 2s alternate infinite;
+}
+
+@keyframes spinner1 {
+    0% {
+        height: 20px;
+    }
+
+    100% {
+        height: 0;
+    }
+}
+
+@keyframes spinner2 {
+    0% {
+        height: 30px;
+    }
+
+    100% {
+        height: 0;
+    }
+}
+
+@keyframes spinner3 {
+    0% {
+        height: 43px;
+    }
+
+    100% {
+        height: 0;
+    }
+}
+
+@keyframes spinner4 {
+    0% {
+        height: 60px;
+    }
+
+    100% {
+        height: 0;
+    }
+}

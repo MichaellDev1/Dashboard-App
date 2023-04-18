@@ -58,7 +58,7 @@ export default function WeekToDo () {
 
       <div>
         <form className='flex items-center' onSubmit={handleAddTask}>
-          <input type='text' name='task' id='inputTask' onChange={(e) => hanldeChange(e)} value={newTask}/>
+          <input type='text' name='task' id='inputTask' onChange={(e) => hanldeChange(e)} value={newTask} />
           <button>Add</button>
         </form>
         <ul>
@@ -73,6 +73,6 @@ export default function WeekToDo () {
           }
         </ul>
       </div>
-    </div>
+      </div>
     : null
 }

@@ -1,0 +1,60 @@
+.inputs-login {
+    background: transparent;
+    padding: 10px;
+    padding-left: 35px;
+    border: 2px solid #e7e6e6;
+    border-radius: 7px;
+    outline: none;
+}
+
+.inputs-login[name='password'] {
+    padding-right: 40px;
+}
+
+.inputs-login:hover {
+    border: 2px solid #cecece;
+}
+
+.inputs-login:focus {
+    border: 2px solid #cecece;
+}
+
+.labels-login {
+    color: #9b9b9b;
+    background-color: #fff;
+    position: absolute;
+    /* top: -12px; */
+    top: 11px;
+    left: 35px;
+    padding: 0 5px;
+    transition: transform .1s, font-size .2s;
+    pointer-events: none;
+}
+
+.icons-input {
+    position: absolute;
+    font-size: 22px;
+    color: #30a2d6;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 9px;
+}
+
+.inputs-login:focus+.labels-login,
+.inputs-login:valid+.labels-login {
+    transform: translateY(-20px);
+    font-size: 13px;
+}
+
+.btn-visibility {
+    color: #9b9b9b;
+    background-color: transparent;
+    position: absolute;
+    right: 10px;
+    padding: 0 5px;
+    transition: transform .1s, font-size .2s;
+    cursor: pointer;
+    height: 100%;
+}

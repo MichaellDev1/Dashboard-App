@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { HiOutlineLogin } from 'react-icons/hi'
 import { useContext } from 'react'
 import Context from '../../context/userContext'
+import './index.css'
 
 export default function Menu ({ menuHidden }) {
   const url = location.pathname
@@ -33,10 +34,10 @@ export default function Menu ({ menuHidden }) {
                 </h3>
                 {itemList.subTitles.map(childrenTitle =>
                   (<li key={childrenTitle.name} className='mb-2'>
-                    <a className={`px-3 py-[6px] rounded-lg transition-[background-color] sm:text-[17px] text-[15px] font-semibold flex items-center hover:text-white hover:bg-[#4360ef] ${url === childrenTitle.href ? 'bg-[#4360ef] text-[#fff]' : 'text-slate-950'}`} href={childrenTitle.href}>
+                    <a className={`px-3 py-[6px] rounded-lg link-menu sm:text-[17px] text-[15px] font-semibold flex items-center hover:text-white hover:bg-[#4360ef] ${url === childrenTitle.href ? 'bg-[#4360ef] text-[#fff]' : 'text-slate-950'}`} href={childrenTitle.href}>
                       <span className='mr-3'>{childrenTitle.icon}</span><span>{childrenTitle.name}</span>
                     </a>
-                   </li>))}
+                  </li>))}
               </div>
             )
             )}

@@ -1,9 +1,29 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { AiOutlineRise } from 'react-icons/ai'
 import { data, options } from '../../Db/GraficaHome'
+import { SiVisa } from 'react-icons/si'
+import { RiMastercardFill } from 'react-icons/ri'
 import Context from '../../context/userContext'
 import ChartLine from '../../components/ChartLine'
 import './index.css'
+const cards = [
+  {
+    type: 'mastercard',
+    number: '0000 0000 0000 1300',
+    bkgnPrimary: '#516ae7',
+    bkgnSecondary: '#60b2e9',
+    icon: <RiMastercardFill />,
+    balance: '10,370.730'
+  },
+  {
+    type: 'visa',
+    number: '0000 0000 0000 1500',
+    bkgnPrimary: '#eb35eb',
+    bkgnSecondary: '#ee5dee',
+    icon: <SiVisa />,
+    balance: '6,823.120'
+  }
+]
 
 export default function Dashboard () {
   const { user, setUser } = useContext(Context)
@@ -19,50 +39,32 @@ export default function Dashboard () {
     ? <div className='px-6 w-full h-min-[400px] relative'>
       <div className='grid md:grid-cols-3 grid-cols-1 gap-5 w-full place-content-centeh-full'>
         <div className='min-h-[520px] col-span-2 flex flex-col gap-5'>
+
           <div
-            className='w-full h-[300px] flex flex-col justify-center bg-white relative py-3 px-5 rounded-2xl'
+            className='w-full mi-h-[300px] justify-center bg-white relative  py-3 px-5 rounded-2xl'
             style={{ boxShadow: '1px 1px 30px rgba(0 0 0 / 5%)' }}
           >
             <h2 className='font-semibold text-xl mb-3'>Your Target</h2>
-            <div className='bg-[#28282e] rounded-xl relative text-white p-5 md:w-[300px] w-[270px] card-animation'>
-              <div className='w-16 min-h-[30px] mb-7'>
-                <img
-                  src='https://1000marcas.net/wp-content/uploads/2019/12/logo-Mastercard.png'
-                  alt=''
-                  className='w-[100%] h-[100%] object-cover'
-                />
-              </div>
-              <div className='flex flex-col h-[62] gap-8'>
-                <div className=''>
-                  <h3 className='font-semibold text-xs'>CARD NUMBER</h3>
-                  <span className='text-sm'>8493 **** **** ****</span>
-                </div>
-                <div className='flex justify-between items-center'>
-                  <div className='flex flex-col gap-[15px]'>
-                    <h6 className='text-[10px]' style={{ lineHeight: '2px' }}>
-                      CARD HOLDER NAME
-                    </h6>
-                    <span
-                      className='font-semibold text-sm'
-                      style={{ lineHeight: '2px' }}
-                    >
-                      {user.name}
-                    </span>
+
+            <div className='flex justify-center items-center sm:flex-row flex-col'>
+              {
+                cards.map(({ bkgnPrimary, bkgnSecondary, type, number, icon, balance }) => (
+                  <div key={type} className='rounded-xl relative m-2 text-white shadow-lg py-4 px-5 sm:w-[300px] w-[300px] card-animation' style={{ background: `linear-gradient(30deg,${bkgnPrimary},${bkgnSecondary})` }}>
+                    <div className='flex justify-end w-full min-h-[30px] text-[40px]'>
+                      {icon}
+                    </div>
+                    <div className='flex flex-col'>
+                      <h5 className='text-sm font-semibold'>Name</h5>
+                      <h5 className='font-normal text-sm'>{user.name}</h5>
+                      <span className='font-normal mt-2'>{number}</span>
+                      <h5 className='text-sm mt-2 font-semibold'>Balance</h5>
+                      <h5 className='font-normal  text-sm'>${balance}</h5>
+                    </div>
                   </div>
-                  <div className='flex flex-col gap-[15px]'>
-                    <h6 className='text-[10px]' style={{ lineHeight: '2px' }}>
-                      VALID THRU
-                    </h6>
-                    <span
-                      className='font-semibold text-base'
-                      style={{ lineHeight: '2px' }}
-                    >
-                      12/28
-                    </span>
-                  </div>
-                </div>
-              </div>
+                ))
+              }
             </div>
+
           </div>
 
           <div
@@ -105,15 +107,14 @@ export default function Dashboard () {
             className='w-full overflow-y-scroll h-[300px] bg-white p-5 rounded-2xl'
             style={{ boxShadow: '1px 1px 30px rgba(0 0 0 / 5%)' }}
           >
-            <h3 className='text-[22px] text-slate-950 font-bold'>
-              Recent Activities
-            </h3>
+            <h2 className='font-semibold text-xl mb-3'>Recent Activities</h2>
+
             <div className='mt-5'>
 
-              <ul className='flex flex-col gap-5'>
+              <ul className='flex flex-col'>
                 {coinActivitie.length > 0
                   ? coinActivitie.map(coin => (
-                    <li key={coin.id}>
+                    <li key={coin.id} className='my-2'>
                       <div className=' flex items-center justify-between'>
                         <div className='flex items-center gap-3'>
                           <div className='w-11 h-11  relative overflow-hidden rounded-2xl'>

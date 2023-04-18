@@ -21,13 +21,13 @@ export default function Routers () {
   const { user } = useContext(Context)
   const [menuHidden, setMenuHidden] = useState(false)
   const [menuUserHidden, setMenuUserHidden] = useState(false)
-
+  const pathVerifi = location.pathname
   const handleOpenMenuUser = () => {
     setMenuUserHidden(!menuUserHidden)
   }
 
   return (
-    <div className='lg:pl-[calc(100% / 256px)] lg:ml-64'>
+    <div className={`${pathVerifi !== '/login' ? 'lg:pl-[calc(100% / 256px)] lg:ml-64' : null}`}>
       <BrowserRouter>
         {user
           ? <>

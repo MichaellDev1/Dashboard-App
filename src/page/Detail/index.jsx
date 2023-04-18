@@ -4,6 +4,7 @@ import getSingleCoin from '../../services/getSingleIcon'
 import Context from '../../context/userContext'
 import { RxStar, RxStarFilled } from 'react-icons/rx'
 import ChartLine from '../../components/ChartLine'
+import Spinner from '../../components/Spinner/index'
 const options = {
   responsive: true,
   plugins: {
@@ -62,7 +63,8 @@ export default function Detail () {
     setUser(JSON.parse(localStorage.getItem('user')))
   }, [])
 
-  const handleBuyCoin = () => {
+  const handleBuyCoin = (e) => {
+    e.preventDefault()
     if (amount <= 0) return
 
     const newCoin = {
@@ -98,6 +100,8 @@ export default function Detail () {
     } else {
       localStorage.setItem('lastCoin', JSON.stringify([newCoin, ...lastCoins]))
     }
+
+    setAmount(0)
   }
 
   const handleAmountCoin = (e) => {
@@ -135,13 +139,13 @@ export default function Detail () {
   }
 
   return user
-    ? <div className='px-6 w-full h-min-[400px] relative'>
+    ? <div className='sm:px-6 px-2 w-full pb-10 h-min-[400px] relative'>
       {isLoading
-        ? <h3 className='text-lg font-semibold'>Cargando...</h3>
+        ? <div className='w-[100%] flex h-[70vh] justify-center items-center'><Spinner /></div>
         : isError
-          ? <h3 className='text-lg font-semibold'>No se a encontrado resultados</h3>
+          ? <div className='w-[100%] flex h-[70vh] justify-center items-center'><h3 className='text-lg font-semibold'>No se a encontrado resultados</h3></div>
           : coin
-            ? <div className=''>
+            ? <div className='w-full bg-white rounded-2xl p-5' style={{ boxShadow: '1px 1px 30px rgba(0 0 0 / 5%)' }}>
               <div className='flex justify-between items-center'>
                 <div className='flex flex-col'>
                   <div className='flex items-center mb-3'>
@@ -164,29 +168,32 @@ export default function Detail () {
                   <ChartLine data={data} options={options} />
                 </div>
               </div>
-              <div className='flex justify-between my-5'>
-                <div className='flex flex-col'>
+              <div className='flex sm:justify-between justify-center my-5 flex-wrap sm:flex-row  flex-col'>
+                <div className='flex flex-col m-3'>
                   <h6 className='text-lg font-semibold'>Circulating Supply</h6>
                   <span className='text-sm font-medium text-[#8f8f8f]'>{coin.circulating_supply}</span>
                 </div>
-                <div className='flex flex-col'>
+                <div className='flex flex-col m-3'>
                   <h6 className='text-lg font-semibold'>Low 24H</h6>
                   <span className='text-sm font-medium text-[#8f8f8f]'>${coin.low_24h.usd}</span>
                 </div>
-                <div className='flex flex-col'>
+                <div className='flex flex-col m-3'>
                   <h6 className='text-lg font-semibold'>High_24H</h6>
                   <span className='text-sm font-medium text-[#8f8f8f]'>${coin.high_24h.usd}</span>
                 </div>
               </div>
-              <div className='flex flex-col items-start'>
+              <form className='flex' onSubmit={handleBuyCoin}>
                 <div>
-                  <input type='number' name='number' id='number' onChange={handleAmountCoin} />
-                  {amount ? <span>{(amount / coin.current_price.usd).toFixed(6)}</span> : null}
+                  <div className='relative'>
+                    <input type='number' name='number' value={amount} id='number' onChange={handleAmountCoin} className='mr-1 bg-transparent border-[1px] border-stone-700 py-1 border-solid sm:w-[250px] w-[150px] text-black text-lg rounded-md pr-20 pl-2' />
+                    <span className='absolute font-medium text-stone-700 right-7 border-l border-stone-700 top-[7px] uppercase px-2'>Usd</span>
+                  </div>
                 </div>
-                <button onClick={handleBuyCoin} className='bg-[#4360EF] text-white font-semibold text-base rounded-lg py-1 px-5'>Buy</button>
-              </div>
+                <button className='bg-[#4360EF] hover:bg-[#3048c2] text-white font-semibold transition-[background-color] text-base rounded-lg py-2 px-5'>Buy</button>
+              </form>
+              {amount ? <span className='font-semibold text-base text-neutral-700'>{(amount / coin.current_price.usd).toFixed(6)} {coin.symbol}</span> : null}
               </div>
             : null}
-      </div>
+    </div>
     : null
 }
