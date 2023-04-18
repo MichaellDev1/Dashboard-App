@@ -1,6 +1,7 @@
 import { listMenuLinks } from './metadata'
 import { useNavigate } from 'react-router-dom'
 import { HiOutlineLogin } from 'react-icons/hi'
+import imageLogo from '../../../public/logo.png'
 import { useContext } from 'react'
 import Context from '../../context/userContext'
 import './index.css'
@@ -22,8 +23,13 @@ export default function Menu ({ menuHidden }) {
     <div className={`w-64 h-full fixed left-0 rounded-xl top-0 bg-white z-20 p-10 lg:left-0 ${menuHidden ? 'left-0' : 'left-full'}`}>
       <div className='flex flex-col justify-between h-full w-full'>
         <div>
-          <div className='mb-16'>
-            <h2 className='text-xl text-[#1d1d1d] font-bold uppercase'>Logo</h2>
+          <div className='mb-10'>
+            <a href='/dashboard' className='flex items-center text-slate-950'>
+              <div className='w-[55px] h-[55px] rounded-full overflow-hidden relative'>
+                <img src={imageLogo} alt='logo' className='w-full h-full object-cover' />
+              </div>
+              <span className='text-xl font-semibold ml-1'>Mishleds</span>
+            </a>
           </div>
           <ul className='flex flex-col gap-10'>
 

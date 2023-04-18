@@ -1,22 +1,29 @@
 export const weeks = [{
   week: 'monday',
-  task: []
+  task: [],
+  color: '#f14a87'
 }, {
   week: 'tuesday',
-  task: []
+  task: [],
+  color: '#12ec0d'
 }, {
   week: 'wednesday',
-  task: []
+  task: [],
+  color: '#F59E0B'
 }, {
   week: 'thursday',
-  task: []
+  task: [],
+  color: '#3B82F6'
 }, {
   week: 'friday',
-  task: []
+  task: [],
+  color: '#22C55E'
 }, {
   week: 'saturday',
-  task: []
+  task: [],
+  color: '#EF4444'
 }, {
   week: 'sunday',
-  task: []
+  task: [],
+  color: '#f14a87'
 }]

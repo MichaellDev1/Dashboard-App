@@ -24,8 +24,8 @@ export default function ToDoApp () {
       <h1 className='text-2xl font-semibold'>To Do List Weeks</h1>
       <ul className='text-black w-full flex flex-col justify-center items-center min-h-[460px]'>
         {tasks.map(week => (
-          <li key={week.week} className=' sm:w-[420px] w-[290px] cursor-pointer my-2'>
-            <CardWeeks week={week.week} />
+          <li key={week.week} className=' sm:w-[500px] w-[290px] cursor-pointer my-2'>
+            <CardWeeks week={week.week} borderColor={week.color} />
           </li>
         ))}
       </ul>

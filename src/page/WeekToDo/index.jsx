@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom'
-import { useCallback, useContext, useEffect, useState } from 'react'
+import { useCallback, useContext, useEffect, useRef, useState } from 'react'
 import Context from '../../context/userContext'
 import CardTask from '../../components/CardTask/CardTask'
 
@@ -10,6 +10,7 @@ export default function WeekToDo () {
   const taskList = JSON.parse(localStorage.getItem('tasks'))
   const inxWeek = taskList.findIndex(res => res.week === week)
   const [tasks, setTasks] = useState()
+  const refCheckImportant = useRef()
 
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem('user')))
@@ -25,7 +26,8 @@ export default function WeekToDo () {
     const createTask = {
       id: tasks.length,
       nameTask: newTask,
-      important: false
+      important: refCheckImportant.current.checked,
+      completed: false
     }
     taskList[inxWeek].task = [createTask, ...tasks]
     localStorage.setItem('tasks', JSON.stringify(taskList))
@@ -40,39 +42,55 @@ export default function WeekToDo () {
     setTasks(taskList[inxWeek].task)
   }
 
-  const handleSaveTask = ({ id, setEditable, refTask }) => {
+  const handleSaveTask = ({ id, setEditable, refTask, refCheckBox, isCompleted }) => {
     const inxTaskEditable = taskList[inxWeek].task.findIndex(task => task.id === id)
     taskList[inxWeek].task[inxTaskEditable] = {
       id,
       nameTask: refTask.current.textContent,
-      important: false
+      important: refCheckBox.current.checked,
+      completed: isCompleted
     }
     localStorage.setItem('tasks', JSON.stringify(taskList))
     setTasks(taskList[inxWeek].task)
     setEditable(false)
   }
 
+  const handleCompleted = ({ id, isCompleted }) => {
+    const inxTaskEditable = taskList[inxWeek].task.findIndex(task => task.id === id)
+    taskList[inxWeek].task[inxTaskEditable] = {
+      ...taskList[inxWeek].task[inxTaskEditable],
+      completed: isCompleted
+    }
+    localStorage.setItem('tasks', JSON.stringify(taskList))
+    setTasks(taskList[inxWeek].task)
+  }
+
   return user
     ? <div className='px-6 w-full h-min-[400px] relative'>
-      <h1 className='font-bold text-2xl capitalize py-3'>{week}</h1>
+      <h1 className='text-2xl font-semibold mb-2 capitalize'>{week}</h1>
 
-      <div>
+      <div className='flex w-full h-[70vh] flex-col items-center'>
         <form className='flex items-center' onSubmit={handleAddTask}>
-          <input type='text' name='task' id='inputTask' onChange={(e) => hanldeChange(e)} value={newTask} />
-          <button>Add</button>
+          <div className='relative'>
+            <input type='text' name='task' id='inputTask' onChange={(e) => hanldeChange(e)} className='bg-transparent py-[6px] pr-8 font-medium text-base  px-3 outline-none rounded-2xl' style={{ border: '2px solid #bebebe' }} value={newTask} />
+            <div className='mx-3 flex items-center absolute right-0 top-0 h-full'>
+              <input type='checkbox' ref={refCheckImportant} />
+            </div>
+          </div>
+          <button className='bg-[#1d4cc0] ml-3 text-white font-semibold text-base py-2 px-5 rounded-2xl'>Create task</button>
         </form>
-        <ul>
+        <ul className='mt-5'>
           {
             tasks
-              ? tasks.map(({ id, important, nameTask }) => (
+              ? tasks.map(({ id, important, nameTask, completed }) => (
                 <li key={id}>
-                  <CardTask data={{ id, important, nameTask }} saveTask={handleSaveTask} deleteTask={handleDeleteTask} />
+                  <CardTask data={{ id, important, nameTask, completed }} saveTask={handleSaveTask} handleCompleted={handleCompleted} deleteTask={handleDeleteTask} />
                 </li>
               ))
               : null
           }
         </ul>
       </div>
-      </div>
+    </div>
     : null
 }

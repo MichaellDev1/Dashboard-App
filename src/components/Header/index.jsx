@@ -48,7 +48,7 @@ export default function Header ({ handleOpenMenuUser }) {
         </button>
       </div>
 
-      {chatShow ? <Chat /> : null}
+      {chatShow ? <Chat handleOpenChat={handleOpenChat} /> : null}
     </header>
   )
 }
