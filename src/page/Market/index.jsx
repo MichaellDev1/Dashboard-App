@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 export default function Market () {
   const [coins, setCoins] = useState([])
-  const { user, setUser } = useContext(Context)
+  const { setUser } = useContext(Context)
 
   useEffect(() => {
     if (localStorage.getItem('user')) {
@@ -20,7 +20,7 @@ export default function Market () {
   return (
     <div className='flex justify-center px-6 w-full h-min-[400px] relative'>
       <div className='sm:px-[20px] w-full'>
-        <div className='flex justify-between mb-1 text-[#1a1a1a] text-lg font-semibold'>
+        <div className='flex justify-between mb-1 text-[#1a1a1a] bg-white py-2 px-5 shadow-sm rounded-lg text-lg font-semibold'>
           <h2>Coin</h2>
           <div className='flex'>
             <div className='w-[100px]'>

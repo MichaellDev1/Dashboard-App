@@ -13,6 +13,7 @@ export default function Menu ({ menuHidden }) {
     localStorage.removeItem('user')
     localStorage.removeItem('lastCoin')
     localStorage.removeItem('favorites')
+    localStorage.removeItem('tasks')
     setUser(null)
     navigate('/login')
   }
@@ -35,7 +36,7 @@ export default function Menu ({ menuHidden }) {
                     <a className={`px-3 py-[6px] rounded-lg transition-[background-color] sm:text-[17px] text-[15px] font-semibold flex items-center hover:text-white hover:bg-[#4360ef] ${url === childrenTitle.href ? 'bg-[#4360ef] text-[#fff]' : 'text-slate-950'}`} href={childrenTitle.href}>
                       <span className='mr-3'>{childrenTitle.icon}</span><span>{childrenTitle.name}</span>
                     </a>
-                  </li>))}
+                   </li>))}
               </div>
             )
             )}

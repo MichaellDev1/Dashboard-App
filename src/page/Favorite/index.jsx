@@ -11,8 +11,6 @@ export default function Favorite () {
     setUser(JSON.parse(localStorage.getItem('user')))
 
     if (favoriteLocal !== null) setFavorites(JSON.parse(favoriteLocal))
-
-    console.log(favorites)
   }, [])
 
   return user
@@ -24,7 +22,7 @@ export default function Favorite () {
                 <ul>
                   {favorites.map(coin => (
                     <li key={coin.id} className='cursor-pointer  my-2'>
-                      <Link to={`/detail/${coin.id}`} className='flex items-center justify-between py-2'>
+                      <Link to={`/detail/${coin.id}`} className='flex items-center justify-between py-2 my-1 mb-1 text-[#1a1a1a] bg-white px-5 shadow-sm w-full rounded-lg text-lg font-semibold'>
                         <div className='flex items-center'>
                           <div className='w-[35px] h-[35px] overflow-hidden mr-3 rounded-full'>
                             <img src={coin.image} alt={coin.name} className='w-full h-full object-cover' />
@@ -39,7 +37,7 @@ export default function Favorite () {
                   ))}
                 </ul>
               </div>
-              : <h4>Aun no tienes favoritos</h4>
+              : <h4 className='text-base font-normal text-[#919191]'>No record</h4>
         }
     </div>
     : null
