@@ -1,20 +1,20 @@
 import React, { useContext, useEffect } from 'react'
 import Context from '../../context/userContext'
+import ContentSection from '../../components/ContentSection/index'
 import { Link } from 'react-router-dom'
 
 export default function Wallet () {
   const { user, setUser } = useContext(Context)
-
   useEffect(() => {
-    setUser(JSON.parse(localStorage.getItem('user')))
+    setUser(JSON.parse(window.localStorage.getItem('user')))
   }, [])
 
   return user
-    ? <div className='px-6 w-full h-min-[400px] relative'>
-      <h1 className='text-2xl font-semibold mb-2'>Your wallet</h1>
-
-      <ul className='w-full'>
-        {
+    ? <ContentSection>
+      <div className='px-6 w-full h-min-[400px] relative'>
+        <h1 className='text-2xl font-semibold mb-2'>Your wallet</h1>
+        <ul className='w-full'>
+          {
           user.coins.length > 0
             ? user.coins.map(({ id, image, name, amountUsd, amount, symbol }) => (
               <li key={id} className='my-1 py-3 mb-1 text-[#1a1a1a] bg-white px-5 shadow-sm w-full rounded-lg text-lg font-semibold'>
@@ -34,7 +34,8 @@ export default function Wallet () {
             ))
             : <h4 className='text-base font-normal text-[#919191]'>No record</h4>
         }
-      </ul>
+        </ul>
       </div>
+    </ContentSection>
     : null
 }

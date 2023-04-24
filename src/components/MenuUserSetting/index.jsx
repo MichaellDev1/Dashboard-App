@@ -1,46 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react'
-import Context from '../../context/userContext'
+import React from 'react'
 import { BiPencil } from 'react-icons/bi'
-
-const linkMenuUser = [
-  {
-    name: 'Tu perfil'
-  },
-  {
-    name: 'Cambiar de cuenta'
-  },
-  {
-    name: 'Idioma: Español'
-  }, {
-    name: 'Ubicación: Argentina'
-  }
-]
+import useUserMenu from '../../hooks/useUserMenu'
+import { linkMenuUser } from '../../Db/menuData'
 
 export default function MenuUserSetting () {
-  const [imageUser, setImageUser] = useState()
-  const { user, setUser } = useContext(Context)
-
-  const imageShow = (e) => {
-    setImageUser(e.target.result)
-  }
-
-  const handlePerfilUser = (e) => {
-    const image = e.target.files[0]
-    const reader = new FileReader()
-    reader.addEventListener('load', imageShow)
-    reader.readAsDataURL(image)
-  }
-
-  useEffect(() => {
-    if (imageUser) {
-      setUser({
-        ...user,
-        image: imageUser
-      })
-      localStorage.setItem('user', JSON.stringify({ ...user, image: imageUser }))
-    }
-  }, [imageUser])
-
+  const { handlePerfilUser, user } = useUserMenu()
   return (
     <div className='w-[300px] z-20 bg-[#ffffff] absolute right-1 top-20 flex rounded-lg flex-col justify-center p-10 shadow-lg'>
       <div>

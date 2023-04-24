@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react'
+import ContentSection from '../../components/ContentSection/index'
 import Context from '../../context/userContext'
 
 export default function Setting () {
@@ -9,8 +10,10 @@ export default function Setting () {
   }, [])
 
   return user
-    ? <div className='px-6 w-full h-min-[400px] relative'>
-      <h1 className='text-2xl font-semibold'>Setting</h1>
+    ? <ContentSection>
+      <div className='px-6 w-full h-min-[400px] relative'>
+        <h1 className='text-2xl font-semibold'>Setting</h1>
       </div>
+      </ContentSection>
     : null
 }

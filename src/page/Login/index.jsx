@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import Context from '../../context/userContext'
 import { startUser } from '../../Db/startUser'
 import { RiLockPasswordLine } from 'react-icons/ri'
@@ -13,7 +13,9 @@ export default function Login () {
   const [isShow, setShow] = useState(false)
   const { setUser } = useContext(Context)
   const [user, setUserLocal] = useState(startUser)
+  const userLocal = localStorage.getItem('user')
 
+  if (userLocal) return <Navigate to='/dashboard' />
   const handleChange = (e) => {
     setUserLocal({
       ...user,

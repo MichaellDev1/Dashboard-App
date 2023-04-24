@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Context from '../../context/userContext'
 import { Link } from 'react-router-dom'
+import ContentSection from '../../components/ContentSection/index'
 
 export default function Favorite () {
   const { user, setUser } = useContext(Context)
@@ -14,9 +15,10 @@ export default function Favorite () {
   }, [])
 
   return user
-    ? <div className='px-6 w-full h-min-[400px] relative'>
-      <h1 className='text-2xl font-semibold'>Your coins favorites</h1>
-      {
+    ? <ContentSection>
+      <div className='px-6 w-full h-min-[400px] relative'>
+        <h1 className='text-2xl font-semibold'>Your coins favorites</h1>
+        {
             favorites
               ? <div className='sm:px-[20px] w-full'>
                 <ul>
@@ -36,9 +38,10 @@ export default function Favorite () {
                     </li>
                   ))}
                 </ul>
-              </div>
+                </div>
               : <h4 className='text-base font-normal text-[#919191]'>No record</h4>
         }
-    </div>
+      </div>
+      </ContentSection>
     : null
 }

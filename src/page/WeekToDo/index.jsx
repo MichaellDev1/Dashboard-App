@@ -2,18 +2,19 @@ import { useParams } from 'react-router-dom'
 import { useCallback, useContext, useEffect, useRef, useState } from 'react'
 import Context from '../../context/userContext'
 import CardTask from '../../components/CardTask/CardTask'
+import ContentSection from '../../components/ContentSection/index'
 
 export default function WeekToDo () {
   const { week } = useParams()
   const { user, setUser } = useContext(Context)
   const [newTask, setNewTask] = useState('')
-  const taskList = JSON.parse(localStorage.getItem('tasks'))
+  const taskList = JSON.parse(window.localStorage.getItem('tasks'))
   const inxWeek = taskList.findIndex(res => res.week === week)
   const [tasks, setTasks] = useState()
   const refCheckImportant = useRef()
 
   useEffect(() => {
-    setUser(JSON.parse(localStorage.getItem('user')))
+    setUser(JSON.parse(window.localStorage.getItem('user')))
     setTasks(taskList[inxWeek].task)
   }, [])
 
@@ -30,7 +31,7 @@ export default function WeekToDo () {
       completed: false
     }
     taskList[inxWeek].task = [createTask, ...tasks]
-    localStorage.setItem('tasks', JSON.stringify(taskList))
+    window.localStorage.setItem('tasks', JSON.stringify(taskList))
     setTasks([createTask, ...tasks])
     setNewTask('')
   }
@@ -38,7 +39,7 @@ export default function WeekToDo () {
   const handleDeleteTask = ({ id }) => {
     const deleteTask = taskList[inxWeek].task.filter(taskk => taskk.id !== id)
     taskList[inxWeek].task = deleteTask
-    localStorage.setItem('tasks', JSON.stringify(taskList))
+    window.localStorage.setItem('tasks', JSON.stringify(taskList))
     setTasks(taskList[inxWeek].task)
   }
 
@@ -50,7 +51,7 @@ export default function WeekToDo () {
       important: refCheckBox.current.checked,
       completed: isCompleted
     }
-    localStorage.setItem('tasks', JSON.stringify(taskList))
+    window.localStorage.setItem('tasks', JSON.stringify(taskList))
     setTasks(taskList[inxWeek].task)
     setEditable(false)
   }
@@ -61,26 +62,27 @@ export default function WeekToDo () {
       ...taskList[inxWeek].task[inxTaskEditable],
       completed: isCompleted
     }
-    localStorage.setItem('tasks', JSON.stringify(taskList))
+    window.localStorage.setItem('tasks', JSON.stringify(taskList))
     setTasks(taskList[inxWeek].task)
   }
 
   return user
-    ? <div className='px-6 w-full h-min-[400px] relative'>
-      <h1 className='text-2xl font-semibold mb-2 capitalize'>{week}</h1>
+    ? <ContentSection>
+      <div className='px-6 w-full h-min-[400px] relative'>
+        <h1 className='text-2xl font-semibold mb-2 capitalize'>{week}</h1>
 
-      <div className='flex w-full h-[70vh] flex-col items-center'>
-        <form className='flex items-center' onSubmit={handleAddTask}>
-          <div className='relative'>
-            <input type='text' name='task' id='inputTask' onChange={(e) => hanldeChange(e)} className='bg-transparent py-[6px] pr-8 font-medium text-base  px-3 outline-none rounded-2xl' style={{ border: '2px solid #bebebe' }} value={newTask} />
-            <div className='mx-3 flex items-center absolute right-0 top-0 h-full'>
-              <input type='checkbox' ref={refCheckImportant} />
+        <div className='flex w-full h-[70vh] flex-col items-center'>
+          <form className='flex items-center flex-wrap justify-center' onSubmit={handleAddTask}>
+            <div className='relative'>
+              <input type='text' name='task' id='inputTask' onChange={(e) => hanldeChange(e)} className='bg-transparent py-[6px] pr-8 font-medium text-base my-3 px-3 outline-none rounded-2xl' style={{ border: '2px solid #bebebe' }} value={newTask} />
+              <div className='mx-3 flex items-center absolute right-0 top-0 h-full'>
+                <input type='checkbox' ref={refCheckImportant} />
+              </div>
             </div>
-          </div>
-          <button className='bg-[#1d4cc0] ml-3 text-white font-semibold text-base py-2 px-5 rounded-2xl'>Create task</button>
-        </form>
-        <ul className='mt-5'>
-          {
+            <button className='bg-[#1d4cc0] ml-3  my-3 text-white font-semibold text-base py-2 px-5 rounded-2xl'>Create task</button>
+          </form>
+          <ul className='mt-5'>
+            {
             tasks
               ? tasks.map(({ id, important, nameTask, completed }) => (
                 <li key={id}>
@@ -89,8 +91,9 @@ export default function WeekToDo () {
               ))
               : null
           }
-        </ul>
+          </ul>
+        </div>
       </div>
-    </div>
+    </ContentSection>
     : null
 }

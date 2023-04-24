@@ -3,6 +3,7 @@ import getPriceCoin from '../../services/getPriceCoin'
 import Context from '../../context/userContext'
 import { Link } from 'react-router-dom'
 import Spinner from '../../components/Spinner'
+import ContentSection from '../../components/ContentSection/index'
 
 export default function Market () {
   const [coins, setCoins] = useState([])
@@ -22,15 +23,16 @@ export default function Market () {
   }, [])
 
   return (
-    <div className='flex justify-center px-6 w-full h-min-[400px] relative'>
-      {
+    <ContentSection>
+      <div className='flex justify-center px-6 w-full h-min-[400px] relative'>
+        {
         isLoading
           ? <div className='w-[100%] flex h-[70vh] justify-center items-center'><Spinner /></div>
           : <div className='sm:px-[20px] w-full'>
             <div className='flex justify-between mb-1 text-[#1a1a1a] bg-white py-2 px-5 shadow-sm rounded-lg text-lg font-semibold'>
               <h2>Coin</h2>
               <div className='flex'>
-                <div className='w-[100px]'>
+                <div className='w-[100px]  sm:block hidden'>
                   <span className='mr-[45px]'>
                     24h
                   </span>
@@ -50,13 +52,13 @@ export default function Market () {
                       <div className='w-[35px] h-[35px] overflow-hidden mr-3 rounded-full'>
                         <img src={coin.image} alt={coin.name} className='w-full h-full object-cover' />
                       </div>
-                      <div className='flex items-center'>
+                      <div className='flex sm:items-center sm:flex-row flex-col'>
                         <h4 className='text-base font-semibold'>{coin.name}</h4>
-                        <span className='ml-[5px] text-stone-600 font-normal text-sm'>{coin.symbol}</span>
+                        <span className='sm:ml-[5px]  text-stone-600 font-normal text-sm'>{coin.symbol}</span>
                       </div>
                     </div>
                     <div className='font-medium flex'>
-                      <div className='w-[100px]'>
+                      <div className='w-[100px] sm:block hidden'>
                         <span className={`${coin.price_change_24h.toString().includes('-') ? 'text-[#e22222]' : 'text-green-700'} mr-8`}>{(coin.price_change_24h).toFixed(3)}
                         </span>
                       </div>
@@ -70,6 +72,7 @@ export default function Market () {
             </ul>
             </div>
       }
-    </div>
+      </div>
+    </ContentSection>
   )
 }
