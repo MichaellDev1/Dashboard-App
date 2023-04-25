@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function CardActivity ({ coin }) {
+function CardActivity ({ coin }) {
   const { name, image, amount, amountUsd } = coin
   return (
     <li className='my-2'>
@@ -23,3 +23,5 @@ export default function CardActivity ({ coin }) {
     </li>
   )
 }
+
+export default React.memo(CardActivity)

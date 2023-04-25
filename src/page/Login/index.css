@@ -21,7 +21,6 @@
 
 .labels-login {
     color: #9b9b9b;
-    background-color: #fff;
     position: absolute;
     /* top: -12px; */
     top: 11px;
@@ -44,8 +43,8 @@
 
 .inputs-login:focus+.labels-login,
 .inputs-login:valid+.labels-login {
-    transform: translateY(-20px);
-    font-size: 13px;
+    transform: translateY(-7px);
+    font-size: 10px;
 }
 
 .btn-visibility {

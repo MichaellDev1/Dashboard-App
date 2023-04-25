@@ -1,11 +1,8 @@
 import React, { useContext, useState } from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Header from '../components/Header/index'
 import Menu from '../components/Menu/index'
 import Dashboard from '../page/Dashboard/index'
 import Market from '../page/Market'
-import { IoMdClose } from 'react-icons/io'
-import { HiMenuAlt1 } from 'react-icons/hi'
 import ToDoApp from '../page/ToDo'
 import WeekToDo from '../page/WeekToDo'
 import MenuUserSetting from '../components/MenuUserSetting'
@@ -17,6 +14,9 @@ import Favorite from '../page/Favorite'
 import Wallet from '../page/Wallet'
 import Setting from '../page/Setting'
 import Home from '../page/Home/index'
+import { IoMdClose } from 'react-icons/io'
+import { HiMenuAlt1 } from 'react-icons/hi'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 export default function Routers () {
   const { user } = useContext(Context)
