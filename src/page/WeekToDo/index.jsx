@@ -31,6 +31,6 @@ export default function WeekToDo () {
           <ListTask handleCompleted={handleCompleted} handleDeleteTask={handleDeleteTask} handleSaveTask={handleSaveTask} tasks={tasks} />
         </div>
       </div>
-    </ContentSection>
+      </ContentSection>
     : null
 }

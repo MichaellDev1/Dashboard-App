@@ -6,6 +6,7 @@ import './index.css'
 
 export default function Menu ({ menuHidden, setMenuHidden }) {
   const { handleLogOut, url } = useMenu()
+
   return (
     <div>
       <div className={`w-full h-[100vh] lg:hidden block fixed top-0 left-0 ${menuHidden ? 'block' : 'hidden'} z-[1]`} onClick={() => setMenuHidden(!menuHidden)} />

@@ -1,7 +1,6 @@
 import { MARKET_URL, SINGLE_COIN, URL_API } from './config'
 
 function dataMarket (data) {
-  console.log(data)
   const { id, name, image, market_data, description, total_volume, symbol } = data
 
   const { thumb, large } = image
