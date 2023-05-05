@@ -1,14 +1,8 @@
-import React, { useContext, useEffect } from 'react'
 import ContentSection from '../../components/ContentSection/index'
-import Context from '../../context/userContext'
+import useUser from '../../hooks/useUser'
 
 export default function Setting () {
-  const { user, setUser } = useContext(Context)
-
-  useEffect(() => {
-    setUser(JSON.parse(localStorage.getItem('user')))
-  }, [])
-
+  const { user } = useUser()
   return user
     ? <ContentSection>
       <div className='px-6 w-full h-min-[400px] relative'>

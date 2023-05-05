@@ -1,27 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react'
-import getPriceCoin from '../../services/getPriceCoin'
-import Context from '../../context/userContext'
 import { Link } from 'react-router-dom'
 import Spinner from '../../components/Spinner'
 import ContentSection from '../../components/ContentSection/index'
+import useMarket from '../../hooks/useMarket'
 
 export default function Market () {
-  const [coins, setCoins] = useState([])
-  const [isLoading, setLoading] = useState(false)
-  const { setUser } = useContext(Context)
-
-  useEffect(() => {
-    if (localStorage.getItem('user')) {
-      setUser(JSON.parse(localStorage.getItem('user')))
-    }
-    setLoading(true)
-
-    getPriceCoin({ limit: 20, page: 1 }).then(res => {
-      setCoins(res)
-      setLoading(false)
-    })
-  }, [])
-
+  const { coins, isLoading } = useMarket()
   return (
     <ContentSection>
       <div className='flex justify-center px-6 w-full h-min-[400px] relative'>
